@@ -29,8 +29,7 @@ const Company = () => {
   }
 
   console.log(personData);
-  if (loading) {
-  }
+
   const { company, title, dates, duties } = personData[value];
 
   return (
