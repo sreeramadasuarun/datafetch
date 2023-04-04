@@ -44,10 +44,10 @@ Variables
   --fixed-width: 620px;
 }
 /*
-  =============== 
-  Global Styles
-  ===============
-  */
+=============== 
+Global Styles
+===============
+*/
 
 *,
 ::after,
@@ -145,16 +145,17 @@ p {
   margin-left: auto;
   margin-right: auto;
 }
+
 .title {
   margin-bottom: 4rem;
   text-align: center;
 }
 
 /*
-  =============== 
-  Jobs
-  ===============
-  */
+=============== 
+Jobs
+===============
+*/
 
 .jobs-center {
   width: 80vw;
@@ -205,8 +206,7 @@ p {
   letter-spacing: var(--spacing);
 }
 .job-desc {
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
   column-gap: 2rem;
   align-items: center;
   margin-bottom: 1.25rem;
@@ -225,10 +225,7 @@ p {
     grid-template-columns: 200px 1fr;
     column-gap: 4rem;
   }
-  .btn-container {
-    flex-direction: column;
-    justify-content: flex-start;
-  }
+
   .job-btn {
     margin-bottom: 1rem;
   }
@@ -262,7 +259,4 @@ p {
 .btn:hover {
   color: var(--clr-primary-1);
   background: var(--clr-primary-8);
-}
-.center-btn {
-  text-align: center;
 }

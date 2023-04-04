@@ -1,50 +1,78 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { FaAngleDoubleRight } from "react-icons/fa";
 import "../fetchdata/fetchstyle.css";
 
 const Company = () => {
-  const [person, setPerson] = useState([]);
+  const [personData, setPersonData] = useState([]);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const fetchdrinks = async (url) => {
-    setLoading(true);
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setPerson(data);
-      console.log(data);
-      setLoading(false);
-    } catch {
-      setLoading(false);
-    }
+  const [value, setValue] = useState(0);
+
+  const fetchdata = async (url) => {
+    const response = await fetch(url);
+    const data = await response.json();
+    setPersonData(data);
+    setLoading(false);
   };
-
   useEffect(() => {
-    fetchdrinks("https://course-api.com/react-tabs-project");
+    fetchdata("https://course-api.com/react-tabs-project");
   }, []);
 
-  console.log(person);
+  if (loading) {
+    return (
+      <section className="section loading">
+        <h1>Loading...</h1>
+      </section>
+    );
+  }
+
+  console.log(personData);
+  if (loading) {
+  }
+  const { company, title, dates, duties } = personData[value];
 
   return (
-    <div className="section">
-      {loading ? (
-        <h2 className="title">loading data wait</h2>
-      ) : (
-        <div className="movie-container">
-          {person.map(({ company, title, dates, id }) => {
+    <section className="section">
+      <div className="title">
+        <h2>experience</h2>
+        <div className="underline"></div>
+      </div>
+      <div className="job-center">
+        <div className="btn-container">
+          {personData.map((props, index) => {
             return (
-              <div key={id}>
-                <div className="title">
-                  <h4>company Name: {company}</h4>
-                  <h4>title Name: {title}</h4>
-                  <h4>dates: {dates}</h4>
-                </div>
-              </div>
+              <button
+                key={uuidv4()}
+                className={`job-btn   
+                  ${index === value && "active-btn"}`}
+                onClick={() => {
+                  setValue(index);
+                }}
+              >
+                {props.company}
+              </button>
             );
           })}
         </div>
-      )}
-    </div>
+        <article className="job-info">
+          <h3>{title}</h3>
+          <h4>{company}</h4>
+          <p className="job-data">{dates}</p>
+          <div className="job-desc">
+            {duties.map((desc) => {
+              return (
+                <div>
+                  <FaAngleDoubleRight className="job-icon" />
+                  <p key={uuidv4()}>{desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </article>
+      </div>
+    </section>
   );
 };
 
